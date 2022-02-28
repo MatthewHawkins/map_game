@@ -60,9 +60,10 @@ function CountryDisplay(props) {
             </div>
             <div css={counterWrapperStyles}>
                 <p css={displayStyles}> {`${props.counter} / 177`} </p>
-                {
-                    volume ? <VolumeUpIcon onClick={() => soundOff()} /> 
-                    : <VolumeOffIcon onClick={() => soundOn()}/>
+                { volume ? 
+                    <VolumeUpIcon onClick={() => soundOff()} />
+                    : 
+                    <VolumeOffIcon onClick={() => soundOn()}/>
                 }
             </div>
         </div>
