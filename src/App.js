@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+/** @jsxImportSource @emotion/react */
+
+import { useState, useEffect } from "react";
+import { css } from '@emotion/react'
+
+import Map from "./components/Map";
+import CountryDisplay from "./components/CountryDisplay";
 
 function App() {
+
+  const bodyStyles = css`
+    overflow: hidden;
+  `;
+
+  const [countries, setCountries] = useState([]);
+  const [choice, setChoice] = useState("");
+  const [counter, setCounter] = useState(0);
+
+  useEffect(()=>{
+    console.log(choice)
+    console.log(counter)
+    if(countries[counter] == choice){
+      setCounter(counter+1)
+    }
+}, [choice])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div css={bodyStyles}>
+      <CountryDisplay countries={countries} counter={counter}/>
+      <Map setCountries={setCountries} setChoice={setChoice} />
     </div>
   );
 }
