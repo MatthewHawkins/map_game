@@ -32,7 +32,6 @@ import {
     return array;
   }
    
-
   function Map(props) {
 
     const geoUrl = "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
@@ -45,11 +44,18 @@ import {
 
     useEffect(()=>{
         var countries = [];
+        var countriesObject = {};
         kevin.forEach(element => {
-            countries.push(element.properties.NAME)
+            var name = element.properties.NAME
+            countries.push(name)
+            countriesObject[name] = "#9e9e9e"
         });
         shuffle(countries)
         props.setCountries(countries)
+        props.setCountriesObject(countriesObject)
+
+        // console.log(countries)
+        // console.log(countriesObject)
     }, [])
     
     return (
@@ -67,7 +73,7 @@ import {
                             props.setChoice(geo.properties.NAME)
                             console.log(geo.properties.NAME)
                         }}
-                        fill={"#9e9e9e"}
+                        fill={props.countriesObject[geo.properties.NAME]}
                         stroke={"#000000"}
                         strokeWidth={".2"}
 
