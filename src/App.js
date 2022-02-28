@@ -5,9 +5,9 @@ import { css } from '@emotion/react'
 
 import Map from "./components/Map";
 import CountryDisplay from "./components/CountryDisplay";
-import song from "./data/137523215.mp3"
+import ding from "./data/137523215.mp3"
 
-const audio = new Audio(song)
+const correctSound = new Audio(ding)
 
 const NUM_COUNTRIES = 176
 
@@ -21,6 +21,7 @@ function App() {
   const [choice, setChoice] = useState("");
   const [counter, setCounter] = useState(0);
   const [countriesObject, setCountriesObject] = useState({})
+  const [playSound, setPlaySound] = useState(false)
 
   useEffect(()=>{
     // console.log(choice)
@@ -28,7 +29,9 @@ function App() {
     // console.log(counter)
     if(countries[counter] == choice){
       countriesObject[choice] = "green"
-      audio.play()
+      if (playSound) {
+        correctSound.play()
+      }
       setCounter(counter+1)
     }
     // 176 from the number of countries given to us
@@ -39,7 +42,7 @@ function App() {
 
   return (
     <div css={bodyStyles}>
-      <CountryDisplay countries={countries} counter={counter}/>
+      <CountryDisplay countries={countries} counter={counter} setPlaySound={setPlaySound}/>
       <Map setCountries={setCountries} setChoice={setChoice} countries={countries} setCountriesObject={setCountriesObject} countriesObject={countriesObject}/>
     </div>
   );

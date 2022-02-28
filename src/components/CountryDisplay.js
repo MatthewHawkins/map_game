@@ -1,8 +1,22 @@
 /** @jsxImportSource @emotion/react */
-import React from 'react';
+import React, { useState } from 'react';
 import { css } from '@emotion/react'
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 
 function CountryDisplay(props) {
+
+    const [volume, setVolume] = useState(true)
+
+    function soundOn() {
+        setVolume(!volume)
+        props.setPlaySound(true)
+    }
+    
+    function soundOff() {
+        setVolume(!volume)
+        props.setPlaySound(false)
+    }
 
     const bodyStyles = css`
         display: flex;
@@ -46,8 +60,11 @@ function CountryDisplay(props) {
             </div>
             <div css={counterWrapperStyles}>
                 <p css={displayStyles}> {`${props.counter} / 177`} </p>
+                {
+                    volume ? <VolumeUpIcon onClick={() => soundOff()} /> 
+                    : <VolumeOffIcon onClick={() => soundOn()}/>
+                }
             </div>
-
         </div>
     );
 }
