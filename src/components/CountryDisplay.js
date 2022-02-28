@@ -1,10 +1,15 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react'
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 
 function CountryDisplay(props) {
+
+    // Initialize true the first time
+    useEffect(() => {
+        props.setPlaySound(true)
+    }, [])
 
     const [volume, setVolume] = useState(true)
 
