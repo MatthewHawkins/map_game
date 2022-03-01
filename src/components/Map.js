@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {
     ComposableMap,
@@ -38,7 +38,9 @@ import {
 
     const bodyStyles = css`
         margin-top: -250px;
-    `;
+    `
+
+    const [hover, setHover] = useState(false)
 
     const kevin = MAPDATA.objects.ne_110m_admin_0_countries.geometries
 
@@ -48,7 +50,11 @@ import {
         kevin.forEach(element => {
             var name = element.properties.NAME
             countries.push(name)
-            countriesObject[name] = "#9e9e9e"
+            countriesObject[name] = {
+                fillColor: "#9e9e9e",
+                hovered: false
+            }
+
         });
         shuffle(countries)
         props.setCountries(countries)
@@ -64,6 +70,7 @@ import {
             <ZoomableGroup 
                 zoom={.70}
                 minZoom={.70}
+                translateExtent={[[-250,-170],[1100,750]]}
             >
             <Geographies geography={geoUrl}>
                 {({ geographies }) =>
@@ -73,9 +80,30 @@ import {
                             props.setChoice(geo.properties.NAME)
                             console.log(geo.properties.NAME)
                         }}
-                        fill={props.countriesObject[geo.properties.NAME]}
+                        // fill={props.countriesObject[geo.properties.NAME].hovered ? "purple" : props.countriesObject[geo.properties.NAME].fillColor}
                         stroke={"#000000"}
                         strokeWidth={".2"}
+                        style={{
+                            default: {
+                                outline: "none",
+                                fill: props.countriesObject[geo.properties.NAME].fillColor
+                            },
+                            hover: {
+                                outline: "none",
+                                fill: "#AEE0DD"
+                            },
+                            pressed: { 
+                                outline: "none",
+                            }
+                          }}
+                        onMouseEnter={() => {
+                            setHover(true)
+                            // props.countriesObject[geo.properties.NAME].fillColor = "purple"
+                        }}
+                        onMouseLeave={() => {
+                            setHover(false)
+                            // props.countriesObject[geo.properties.NAME].fillColor = "#9e9e9e"
+                        }}
 
                     />
                 ))

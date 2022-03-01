@@ -30,7 +30,6 @@ function CountryDisplay(props) {
         width: 100%;
     `;
     const displayStyles = css`
-        /* position: absolute; */
         font-size: 1.5em;
     `;
 
@@ -42,20 +41,17 @@ function CountryDisplay(props) {
         display: flex;
         justify-content: center;
         position: absolute;
-        /* flex: 1; */
     `
     const counterWrapperStyles = css`
         display: flex;
         justify-content: end;
         align-items: center;
-        /* width: 100%; */
         position: absolute;
         right: 10px;
         background-color: #afe0dd;
         border-radius: 35px;
         padding: 0px 10px;
         margin-top: 10px;
-        /* flex: 1; */
     `
 
     return (

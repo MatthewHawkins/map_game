@@ -7,6 +7,7 @@ import Map from "./components/Map";
 import CountryDisplay from "./components/CountryDisplay";
 import ding from "./data/137523215.mp3"
 // import ding from './data/Y2Mate.is - Sports Utility Vehicle-bDPo3EhUWi4-240p-1646116678114.mp4'
+//Thx Kev -_-
 
 const correctSound = new Audio(ding)
 
@@ -29,7 +30,7 @@ function App() {
     // console.log(countries)
     // console.log(counter)
     if(countries[counter] == choice){
-      countriesObject[choice] = "green"
+      countriesObject[choice].fillColor = "green"
       if (playSound) {
         correctSound.play()
       }
